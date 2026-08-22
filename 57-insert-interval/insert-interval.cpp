@@ -3,8 +3,9 @@ public:
     vector<vector<int>> insert(vector<vector<int>>& a, vector<int>& newInterval) {
         vector<vector<int>>preres;
         bool insert = false;
-        int start = 1;
+        
         for(int i=0;i<a.size();i++){
+            int start = a[i][0];
         if(insert==false && start>=newInterval[0]){
             preres.push_back(newInterval);
             insert = true;
@@ -13,7 +14,7 @@ public:
         }
         if(insert==false)
             preres.push_back(newInterval);
-        sort(preres.begin(), preres.end());
+        
         vector<vector<int>>res;
         int start1 = preres[0][0];
         int end1 = preres[0][1];
