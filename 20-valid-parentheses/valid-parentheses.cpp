@@ -1,25 +1,25 @@
 class Solution {
 public:
     bool isValid(string s) {
-        map<char, char> paren;
-        paren['('] = ')';
-        paren['{'] = '}';
-        paren['['] = ']';
-        
-        set<char> keys = {'(', '{', '['};
-        
-        stack<char> stk;
-        
-        for(char c : s){
-            if(keys.find(c) != keys.end()){//left
-                stk.push(c);
-            }else if(!stk.empty() && paren[stk.top()] == c){//right, match
-                stk.pop();
-            }else{//right, not match
-                return false;
+        stack<char> st;
+        for(char ch : s){
+            if(ch=='(' || ch=='[' || ch=='{'){
+                st.push(ch);
             }
+            else{
+                if(st.empty()) return false;
+
+                if ((ch == ')' && st.top() != '(') ||
+                    (ch == '}' && st.top() != '{') ||
+                    (ch == ']' && st.top() != '[')) {
+                    return false;
+                }
+                st.pop();
+            }
+            
+
         }
+        return st.empty();
         
-        return stk.empty();
     }
 };
